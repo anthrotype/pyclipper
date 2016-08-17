@@ -65,18 +65,18 @@ matrix:
         - MB_PYTHON_VERSION=3.5
 
 before_install:
-    - source multibuild/common_utils.sh
-    - source multibuild/travis_steps.sh
-    - before_install
+  - source multibuild/common_utils.sh
+  - source multibuild/travis_steps.sh
+  - before_install
 
 install:
-    - build_wheel $REPO_DIR $PLAT
+  - build_wheel $REPO_DIR $PLAT
 
 script:
-    - install_run $PLAT
+  - install_run $PLAT
 
 after_success:
-    - if [ -n "$TRAVIS_TAG" ]; then python setup.py sdist -d ${TRAVIS_BUILD_DIR}/dist; fi
+  - if [ -n "$TRAVIS_TAG" ]; then python setup.py sdist -d ${TRAVIS_BUILD_DIR}/dist; fi
 
 deploy:
   provider: releases

@@ -76,7 +76,7 @@ script:
   - install_run $PLAT
 
 after_success:
-  - if [ -n "$TRAVIS_TAG" ]; then python setup.py sdist -d ${TRAVIS_BUILD_DIR}/dist; fi
+  - if [ -n "$TRAVIS_TAG" ]; then pip install cython; python setup.py sdist -d ${TRAVIS_BUILD_DIR}/dist; fi
 
 deploy:
   provider: releases

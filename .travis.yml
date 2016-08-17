@@ -77,7 +77,9 @@ script:
   - install_run $PLAT
 
 after_success:
+  # if commit is tagged, create the source distribution
   - if [ -n "$TRAVIS_TAG" ] && [ "$BUILD_SDIST" == true ]; then pip install cython; python setup.py sdist -d ${TRAVIS_BUILD_DIR}/dist; fi
+  # copy compiled wheel to 'dist' folder for the deploy stage
   - if [ -n "$TRAVIS_TAG" ]; then cp ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl ${TRAVIS_BUILD_DIR}/dist; fi
 
 deploy:

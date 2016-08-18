@@ -72,15 +72,13 @@ build_script:
 
 test_script:
   # Run the project tests
-  - "%CMD_IN_ENV% python setup.py test"
+  - "%CMD_IN_ENV% python setup.py test --pytest-args=\"-v tests\""
 
 after_test:
-  # If tests are successful, create distribution packages
-  - "%CMD_IN_ENV% pip wheel -w dist ."
-  - "%CMD_IN_ENV% python setup.py sdist"
-  - ps: "ls dist"
+  # If tests are successful, create binary packages
+  - "%CMD_IN_ENV% pip wheel -w wheelhouse ."
+  - ps: "ls wheelhouse"
 
 artifacts:
   # Archive the generated packages in the ci.appveyor.com build report
-  - path: dist\*.whl
-  - path: dist\*.zip
+  - path: wheelhouse\*.whl
